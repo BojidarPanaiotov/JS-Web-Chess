@@ -1,9 +1,9 @@
 import Pawn from './pawn.js';
+import constants from './constants.js';
+
 
 let chessBoardElement = document.querySelector('#chess-board');
 let chessBoardMatrix = [];
-const _white = 'white';
-const _black = 'black';
 
 function drawChessBoard() {
   // Rows
@@ -39,11 +39,11 @@ function drawChessBoard() {
 
 function drawFigures() {
   for (let i = 0; i < 8; i++) {
-    let blackPawn = new Pawn(1,i,'♟',_black);
+    let blackPawn = new Pawn(1,i,'♟',constants._black);
     document.getElementById(1 + '-' + i).firstChild.innerHTML = blackPawn.figureIcon;
     chessBoardMatrix[1][i] = blackPawn;
 
-    let whitePawn = new Pawn(6,i,'♙',_white);
+    let whitePawn = new Pawn(6,i,'♙',constants._white);
     document.getElementById(6 + '-' + i).firstChild.innerHTML = whitePawn.figureIcon;
     chessBoardMatrix[6][i] = whitePawn;
 
