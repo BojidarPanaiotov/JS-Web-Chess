@@ -24,3 +24,4 @@ function handleFigureAnimation(animationClass, e) {
   }
 }
 Draw.drawChessBoard(chessBoardElement,chessBoardMatrix,figures.figuresToDraw);
+console.log(chessBoardMatrix);
