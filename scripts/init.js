@@ -1,5 +1,6 @@
-import constants from './constants.js';
 import Draw from './draw.js';
+
+import constants from './constants.js';
 import figures from './utils/figureToDraw.js';
 
 let chessBoardElement = document.querySelector('#chess-board');
