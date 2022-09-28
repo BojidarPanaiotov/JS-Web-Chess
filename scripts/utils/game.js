@@ -10,14 +10,13 @@ function getClickedFigureAsObject(event, matrix) {
 }
 
 function drawChessBoard(root,matrix,figures) {
-  // Rows
+  // Drawing the chess board
   for (let rowIndex = 0; rowIndex < 8; rowIndex++) {
     let row = document.createElement('div');
     row.setAttribute('class','row');
   
     matrix.push([]);
 
-    // Columns
     for (let boxIndex = 0; boxIndex < 8; boxIndex++) {
       let box = document.createElement('div');
       let iconPlaceholder = document.createElement('span');
@@ -42,11 +41,7 @@ function drawChessBoard(root,matrix,figures) {
     root.appendChild(row);
   }
 
-  drawFigures(figures,matrix);
-}
-
-// Function which is called when the board is drawn
-function drawFigures(figures, matrix) {
+  // Drawing the figures
   for (let i = 0; i < figures.length; i++) {
     let figure = figures[i];
     let selector = figure.initialX + '-' + figure.initialY;
@@ -74,18 +69,23 @@ function handleFigureAnimation(animationClass, e) {
   }
 }
 
-function changeBoxesColor(coordinates) {
-  let oldColorsCoordinates = [];
-
+function changeBoxesColor(currentFigureColor, matrix,coordinates) {
   for (let i = 0; i < coordinates.length; i++) {
     let x = coordinates[i].x;
     let y = coordinates[i].y;
     let box = document.getElementById(x+'-'+y);
-    oldColorsCoordinates.push({x:x,y:y,color: box.style.backgroundColor});
-    box.style.backgroundColor= '#4CBB17';
-  }
 
-  return oldColorsCoordinates;
+    if(matrix[x][y] === null) {
+      box.style.backgroundColor = '#4CBB17';
+      box.classList.add('can-move');
+    } else {
+      if(matrix[x][y].color === currentFigureColor) {
+        continue;
+      }
+      box.style.backgroundColor = 'red';
+    }
+
+  }
 }
 
 function returnBorderColors() {
@@ -101,6 +101,8 @@ function returnBorderColors() {
       } else {
         box.style.backgroundColor = '#FFFFFF';
       }
+
+      box.classList.remove('can-move');
     }
   }
 }
@@ -108,5 +110,6 @@ export default {
     getClickedFigureAsObject: getClickedFigureAsObject,
     drawChessBoard: drawChessBoard,
     handleFigureAnimation: handleFigureAnimation,
-    changeBoxesColor: changeBoxesColor
+    changeBoxesColor: changeBoxesColor,
+    returnBorderColors: returnBorderColors
 }

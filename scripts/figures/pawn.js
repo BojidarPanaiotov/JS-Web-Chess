@@ -5,8 +5,19 @@ export default class Pawn extends Figure {
         super(initialX, initialY,figureIcon,color);
     }
 
-    move() {
-        
+    move(matrix, clickedCoordinates) {
+        var possibleMoves = this.getPossibleMoves(matrix);
+        var canMove;
+        let clickedX = clickedCoordinates.x;
+        let clickedY = clickedCoordinates.y;
+
+        for (let i = 0; i < possibleMoves.length; i++) {
+            if(possibleMoves[i].x === clickedX && possibleMoves[i].y === clickedY) {
+                canMove = true;
+                this.renderPosition(matrix, clickedCoordinates)
+            }
+        }
+        return canMove;
     }
 
     isFirstMove() {
@@ -17,17 +28,23 @@ export default class Pawn extends Figure {
         let moves = [];
 
         if(this.color === 'white') {
-            if(this.isFirstMove()) {
+            if(this.isFirstMove() && matrix[this.currentX-1][this.currentY] === null) {
                 moves.push({x: -2,y: 0});
             }
-            moves.push({x: -1,y: 0});
+            if(matrix[this.currentX-1][this.currentY] === null) {
+                moves.push({x: -1,y: 0});
+            }
+
             moves.push({x: -1,y: -1});
             moves.push({x: -1,y: +1});
         } else {
-            if(this.isFirstMove()) {
+            if(this.isFirstMove() && matrix[this.currentX+1][this.currentY] === null) {
                 moves.push({x: +2,y: 0});
             }
-            moves.push({x: +1,y: 0});
+
+            if(matrix[this.currentX+1][this.currentY] === null) {
+                moves.push({x: +1,y: 0});
+            }
             moves.push({x: +1,y: +1});
             moves.push({x: +1,y: -1});
         }
@@ -60,5 +77,11 @@ export default class Pawn extends Figure {
         }
 
         return validCoordinates;
+    }
+
+    renderPosition(matrix, coordinates) {
+        // Matrix handling
+        matrix[this.currentX][this.currentY] = null;
+        matrix[coordinates.x][coordinates.y] = this;
     }
 }
