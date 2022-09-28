@@ -1,54 +1,29 @@
 import Pawn from './pawn.js';
 import constants from './constants.js';
-
+import Draw from './draw.js';
 
 let chessBoardElement = document.querySelector('#chess-board');
 let chessBoardMatrix = [];
 
-function drawChessBoard() {
-  // Rows
-  for (let rowIndex = 0; rowIndex < 8; rowIndex++) {
-    let row = document.createElement('div');
-    row.setAttribute('class','row');
-  
-    chessBoardMatrix.push([]);
+let figuresToDraw = [
+  // Black Figures
+  new Pawn(1,0,'♟',constants._black),
+  new Pawn(1,1,'♟',constants._black),
+  new Pawn(1,2,'♟',constants._black),
+  new Pawn(1,3,'♟',constants._black),
+  new Pawn(1,4,'♟',constants._black),
+  new Pawn(1,5,'♟',constants._black),
+  new Pawn(1,6,'♟',constants._black),
+  new Pawn(1,7,'♟',constants._black),
+  // White Figures
+  new Pawn(6,0,'♙',constants._white),
+  new Pawn(6,1,'♙',constants._white),
+  new Pawn(6,2,'♙',constants._white),
+  new Pawn(6,3,'♙',constants._white),
+  new Pawn(6,4,'♙',constants._white),
+  new Pawn(6,5,'♙',constants._white),
+  new Pawn(6,6,'♙',constants._white),
+  new Pawn(6,7,'♙',constants._white),
+];
 
-    // Columns
-    for (let boxIndex = 0; boxIndex < 8; boxIndex++) {
-      let box = document.createElement('div');
-      let iconPlaceholder = document.createElement('span');
-  
-      box.setAttribute('id', rowIndex + '-' + boxIndex);
-      iconPlaceholder.setAttribute('class','figure');
-      box.appendChild(iconPlaceholder);
-
-      if((boxIndex+rowIndex) % 2 === 1) {
-        box.style.backgroundColor = '#E97451';
-      }
-  
-      box.setAttribute('class','box');
-  
-      row.appendChild(box);
-
-      chessBoardMatrix[rowIndex][boxIndex] = null;
-    }
-  
-    chessBoardElement.appendChild(row);
-  }
-}
-
-function drawFigures() {
-  for (let i = 0; i < 8; i++) {
-    let blackPawn = new Pawn(1,i,'♟',constants._black);
-    document.getElementById(1 + '-' + i).firstChild.innerHTML = blackPawn.figureIcon;
-    chessBoardMatrix[1][i] = blackPawn;
-
-    let whitePawn = new Pawn(6,i,'♙',constants._white);
-    document.getElementById(6 + '-' + i).firstChild.innerHTML = whitePawn.figureIcon;
-    chessBoardMatrix[6][i] = whitePawn;
-
-  }
-}
-console.log(chessBoardMatrix);
-drawChessBoard();
-drawFigures()
+Draw.drawChessBoard(chessBoardElement,chessBoardMatrix,figuresToDraw);
