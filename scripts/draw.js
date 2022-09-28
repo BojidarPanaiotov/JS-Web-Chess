@@ -41,6 +41,7 @@ function drawFigures(figures, matrix) {
       matrix[figure.initialX][figure.initialY] = figure;
     }
 }
+
 export default {
     drawChessBoard: drawChessBoard
 }
