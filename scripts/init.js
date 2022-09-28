@@ -7,7 +7,8 @@ let chessBoardElement = document.querySelector('#chess-board');
 let chessBoardMatrix = [];
 
 chessBoardElement.addEventListener('click', function(e) {
-  handleFigureAnimation(constants._idleAnimation, e)
+  handleFigureAnimation(constants._idleAnimation, e);
+  getClickedFigureAsObject(e);
 });
 
 function handleFigureAnimation(animationClass, e) {
@@ -22,6 +23,17 @@ function handleFigureAnimation(animationClass, e) {
   if(isFigureClicked) {
    e.target.classList.add(animationClass);
   }
+}
+
+function getClickedFigureAsObject(e) {
+  let figure;
+
+  if(e.target.parentNode.classList.contains('box')) {
+    let id = e.target.parentNode.id.split('-');
+    figure = chessBoardMatrix[id[0]][id[1]];
+  }
+
+  return figure;
 }
 Draw.drawChessBoard(chessBoardElement,chessBoardMatrix,figures.figuresToDraw);
 console.log(chessBoardMatrix);
