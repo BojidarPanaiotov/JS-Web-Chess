@@ -1,17 +1,16 @@
 #chess-board {
-    width: 640px;
-    height: 640px;
     border: 1px solid black;
+    width: 640px;
+    margin: 0 auto;
 }
 
 .row {
     display: flex;
     flex-direction: row;
-    height: 20px;
 }
 
 .box {
     width: 80px;
     height: 80px;
-    border: 1px solid red;
+    border: 1px solid black;
 }
