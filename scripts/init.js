@@ -26,4 +26,21 @@ let figuresToDraw = [
   new Pawn(6,7,'♙',constants._white),
 ];
 
+chessBoardElement.addEventListener('click', function(e) {
+  handleFigureAnimation(constants._idleAnimation, e)
+});
+
+function handleFigureAnimation(animationClass, e) {
+  var animation = document.querySelectorAll('.'+animationClass);
+
+  if(animation) {
+    animation.forEach(el => el.classList.remove(animationClass));
+  }
+  
+  var isFigureClicked = e.target.parentNode.classList.contains('box');
+
+  if(isFigureClicked) {
+   e.target.classList.add(animationClass);
+  }
+}
 Draw.drawChessBoard(chessBoardElement,chessBoardMatrix,figuresToDraw);

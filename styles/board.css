@@ -17,6 +17,22 @@
 }
 
 .figure {
-    font-size: 3em;
+    font-size: 4em;
     cursor: pointer;
+    position: relative;
 }
+
+.idle-animation {
+    animation-name: idle-figure-animation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+
+
+@keyframes idle-figure-animation {
+    0%   {top: 10%; bottom: 0%;}
+    25%  {top: 0%; bottom: 10%;}
+    50%  {top: 10%; bottom: 0%;}
+    100% {top: 0%; bottom: 10%;}
+  }
