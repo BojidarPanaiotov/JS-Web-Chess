@@ -37,7 +37,7 @@ export default class Pawn extends Figure {
     }
 
     calculateCoordinatesFromOrigin(matrix,coordinates) {
-        var validCoordinates = [];
+        let validCoordinates = [];
 
         for (let i = 0; i < coordinates.length; i++) {
             let x = this.currentX + coordinates[i].x;

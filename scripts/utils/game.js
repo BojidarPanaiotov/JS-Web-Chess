@@ -74,12 +74,12 @@ function handleFigureAnimation(animationClass, e) {
 }
 
 function changeBoxesColor(coordinates) {
-  var oldColorsCoordinates = [];
+  let oldColorsCoordinates = [];
 
   for (let i = 0; i < coordinates.length; i++) {
-    var x = coordinates[i].x;
-    var y = coordinates[i].y;
-    var box = document.getElementById(x+'-'+y);
+    let x = coordinates[i].x;
+    let y = coordinates[i].y;
+    let box = document.getElementById(x+'-'+y);
     oldColorsCoordinates.push({x:x,y:y,color: box.style.backgroundColor});
     box.style.backgroundColor= '#4CBB17';
   }
