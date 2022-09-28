@@ -63,6 +63,7 @@ function handleFigureAnimation(animationClass, e) {
   // If old figure has animation remove it
   if(animation) {
     animation.forEach(el => el.classList.remove(animationClass));
+    returnBorderColors();
   }
 
   let isFigureClicked = e.target.parentNode.classList.contains('box');
@@ -85,6 +86,23 @@ function changeBoxesColor(coordinates) {
   }
 
   return oldColorsCoordinates;
+}
+
+function returnBorderColors() {
+  // Rows
+  for (let rowIndex = 0; rowIndex < 8; rowIndex++) {
+
+    // Columns
+    for (let boxIndex = 0; boxIndex < 8; boxIndex++) {
+      let box = document.getElementById(rowIndex + '-' + boxIndex);
+
+      if((boxIndex+rowIndex) % 2 === 1) {
+        box.style.backgroundColor = '#E97451';
+      } else {
+        box.style.backgroundColor = '#FFFFFF';
+      }
+    }
+  }
 }
 export default {
     getClickedFigureAsObject: getClickedFigureAsObject,

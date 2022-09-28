@@ -11,9 +11,9 @@ Game.drawChessBoard(chessBoardElement,chessBoardMatrix,figures.figuresToDraw);
 // Listening for figure click
 chessBoardElement.addEventListener('click', function(e) {
   let figure = Game.getClickedFigureAsObject(e,chessBoardMatrix);
+  Game.handleFigureAnimation(constants._idleAnimation, e);
   
   if(figure) {
-    Game.handleFigureAnimation(constants._idleAnimation, e);
     Game.changeBoxesColor(figure.getPossibleMoves(chessBoardMatrix));
   }
 });
