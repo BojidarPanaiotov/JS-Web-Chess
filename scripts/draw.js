@@ -17,6 +17,8 @@ function drawChessBoard(root,matrix,figures) {
   
         if((boxIndex+rowIndex) % 2 === 1) {
           box.style.backgroundColor = '#E97451';
+        } else {
+          box.style.backgroundColor = '#FFFFFF';
         }
     
         box.setAttribute('class','box');
