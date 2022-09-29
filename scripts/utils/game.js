@@ -44,10 +44,10 @@ function drawChessBoard(root,matrix,figures) {
   // Drawing the figures
   for (let i = 0; i < figures.length; i++) {
     let figure = figures[i];
-    let selector = figure.initialX + '-' + figure.initialY;
+    let selector = figure.currentX + '-' + figure.currentY;
 
     document.getElementById(selector).firstChild.innerHTML = figure.figureIcon;
-    matrix[figure.initialX][figure.initialY] = figure;
+    matrix[figure.currentX][figure.currentY] = figure;
   }
 }
 
