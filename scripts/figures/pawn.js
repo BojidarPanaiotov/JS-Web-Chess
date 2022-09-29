@@ -7,10 +7,6 @@ export default class Pawn extends Figure {
         this.initialY = initialY;
     }
 
-    isFirstMove() {
-        return this.initialX === this.currentX && this.initialY === this.currentY;
-    }
-
     getPossibleMoves(matrix) {
         let moves = [];
 
@@ -24,8 +20,13 @@ export default class Pawn extends Figure {
             console.log('special move');
             return;
         }
-        // If is the first move of the pawn
-        if(this.isFirstMove() && matrix[this.currentX+indexChecker][this.currentY] === null) {
+
+        // Is first move
+        if((this.currentX === this.initialX && this.currentY === this.initialY)
+            // First box is empty
+            && matrix[this.currentX+indexChecker][this.currentY] === null
+            // Second box is empty
+            && matrix[this.currentX][indexChecker - indexChecker]) {
             moves.push({x: figureAllMoves[0].x,y: figureAllMoves[0].y});
         }
 
