@@ -21,7 +21,7 @@ function drawChessBoard(root,matrix,figures) {
       let box = document.createElement('div');
       let iconPlaceholder = document.createElement('span');
   
-      box.setAttribute('id', rowIndex + '-' + boxIndex);
+      box.setAttribute('id', getCoordinatesAsString(rowIndex,boxIndex));
       iconPlaceholder.setAttribute('class','figure');
       box.appendChild(iconPlaceholder);
 
@@ -44,7 +44,7 @@ function drawChessBoard(root,matrix,figures) {
   // Drawing the figures
   for (let i = 0; i < figures.length; i++) {
     let figure = figures[i];
-    let selector = figure.currentX + '-' + figure.currentY;
+    let selector = getCoordinatesAsString(figure.currentX, figure.currentY);
 
     document.getElementById(selector).firstChild.innerHTML = figure.figureIcon;
     matrix[figure.currentX][figure.currentY] = figure;
@@ -89,12 +89,10 @@ function changeBoxesColor(currentFigureColor, matrix,coordinates) {
 }
 
 function normalizeChessBoard() {
-  // Rows
   for (let rowIndex = 0; rowIndex < 8; rowIndex++) {
 
-    // Columns
     for (let boxIndex = 0; boxIndex < 8; boxIndex++) {
-      let box = document.getElementById(rowIndex + '-' + boxIndex);
+      let box = document.getElementById(getCoordinatesAsString(rowIndex, boxIndex));
       if((boxIndex+rowIndex) % 2 === 1) {
         box.style.backgroundColor = '#E97451';
       } else {
@@ -121,13 +119,15 @@ function removeFigure(matrix, e, lastClickedFigure) {
   // Removing the figure from the DOM
   htmlFigure.firstChild.textContent = '';
   // Moving the other figure to this position in the matrix
-  lastClickedFigure.renderPosition(matrix,{x: arrayIndex[0],y: arrayIndex[1]});
+  lastClickedFigure.handlePosition(matrix,{x: arrayIndex[0],y: arrayIndex[1]});
   // Moving it visually
   htmlFigure.firstChild.textContent = lastClickedFigure.figureIcon;
   // Removing the old position
   var a =document.getElementById(lastClickedFigure.currentX+'-'+lastClickedFigure.currentY);
   a.firstChild.textContent = '';
   a.firstChild.classList.remove('idle-animation');
+  // Update figure coordinates
+  lastClickedFigure.updateCoordinates(Number(arrayIndex[0]),Number(arrayIndex[1]));
 
   normalizeChessBoard();
 }
@@ -138,16 +138,19 @@ function moveFigure(matrix, e, lastClickedFigure) {
   // Box coordinates as object
   let coordinatesObject = {x: Number(clickedBoxCoordinates[0]), y: Number(clickedBoxCoordinates[1])};
   // Move the figure in the matrix
-  lastClickedFigure.renderPosition(matrix,coordinatesObject);
+  lastClickedFigure.handlePosition(matrix,coordinatesObject);
   // Deleting old position on the chess board visually
-  document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).textContent = '';
+  document.getElementById(getCoordinatesAsString(lastClickedFigure.currentX, lastClickedFigure.currentY)).textContent = '';
   // Update figure coordinates
-  lastClickedFigure.currentX = coordinatesObject.x;
-  lastClickedFigure.currentY = coordinatesObject.y;
+  lastClickedFigure.updateCoordinates(coordinatesObject.x, coordinatesObject.y);
   // Display the figure visually on the new coordinates
-  document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).firstChild.textContent = lastClickedFigure.figureIcon;
+  document.getElementById(getCoordinatesAsString(lastClickedFigure.currentX, lastClickedFigure.currentY)).firstChild.textContent = lastClickedFigure.figureIcon;
 
   normalizeChessBoard();
+}
+
+function getCoordinatesAsString(x,y) {
+  return x + '-' + y;
 }
 
 export default {
@@ -157,5 +160,6 @@ export default {
     changeBoxesColor: changeBoxesColor,
     normalizeChessBoard: normalizeChessBoard,
     removeFigure: removeFigure,
-    moveFigure: moveFigure
+    moveFigure: moveFigure,
+    getCoordinatesAsString: getCoordinatesAsString
 }

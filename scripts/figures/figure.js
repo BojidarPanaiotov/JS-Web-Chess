@@ -15,19 +15,24 @@ export default class Figure {
     for (let i = 0; i < possibleMoves.length; i++) {
         if(possibleMoves[i].x === clickedX && possibleMoves[i].y === clickedY) {
             canMove = true;
-            this.renderPosition(matrix, clickedCoordinates)
+            this.handlePosition(matrix, clickedCoordinates)
         }
     }
 
     return canMove;
   }
 
-  renderPosition(matrix, coordinates) {
+  handlePosition(matrix, coordinates) {
     matrix[this.currentX][this.currentY] = null;
     matrix[coordinates.x][coordinates.y] = this;
   }
 
   destroy(matrix) {
     matrix[this.currentX][this.currentY] = null;
+  }
+
+  updateCoordinates(x,y) {
+    this.currentX = x;
+    this.currentY = y;
   }
 }

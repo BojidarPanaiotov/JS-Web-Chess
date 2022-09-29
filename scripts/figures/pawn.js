@@ -20,6 +20,10 @@ export default class Pawn extends Figure {
         let figureAllMoves = this.color === 'white' ? whiteMoves : blackMoves;
         let indexChecker = this.color === 'white' ? -1 : +1;
 
+        if(this.currentX+indexChecker === 8) {
+            console.log('special move');
+            return;
+        }
         // If is the first move of the pawn
         if(this.isFirstMove() && matrix[this.currentX+indexChecker][this.currentY] === null) {
             moves.push({x: figureAllMoves[0].x,y: figureAllMoves[0].y});
