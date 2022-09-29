@@ -140,7 +140,9 @@ function moveFigure(matrix, e, lastClickedFigure) {
   // Move the figure in the matrix
   lastClickedFigure.handlePosition(matrix,coordinatesObject);
   // Deleting old position on the chess board visually
-  document.getElementById(getCoordinatesAsString(lastClickedFigure.currentX, lastClickedFigure.currentY)).textContent = '';
+  var oldBox = document.getElementById(getCoordinatesAsString(lastClickedFigure.currentX, lastClickedFigure.currentY)).firstChild;
+  oldBox.textContent = '';
+  oldBox.classList.remove('idle-animation');
   // Update figure coordinates
   lastClickedFigure.updateCoordinates(coordinatesObject.x, coordinatesObject.y);
   // Display the figure visually on the new coordinates
