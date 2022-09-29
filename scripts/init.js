@@ -15,17 +15,12 @@ chessBoardElement.addEventListener('click', function(e) {
   let canGet = e.target.classList.contains('can-get');
 
   if(canMove) {
-    let clickedBoxCoordinates = e.target.id.split('-');
-    let coordinatesObject = {x: Number(clickedBoxCoordinates[0]), y: Number(clickedBoxCoordinates[1])};
-    lastClickedFigure.move(chessBoardMatrix,coordinatesObject);
-    document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).textContent = '';
-    lastClickedFigure.currentX = coordinatesObject.x;
-    lastClickedFigure.currentY = coordinatesObject.y;
-    document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).firstChild.textContent = lastClickedFigure.figureIcon;
-    Game.normalizeChessBoard();
-    return;
+    Game.moveFigure(chessBoardMatrix, e, lastClickedFigure)
   } else if(canGet) {
     Game.removeFigure(chessBoardMatrix, e, lastClickedFigure);
+  }
+
+  if(canMove || canGet) {
     return;
   }
 

@@ -121,6 +121,25 @@ function removeFigure(matrix, e, lastClickedFigure) {
   // Moving it visually
   htmlFigure.firstChild.textContent = lastClickedFigure.figureIcon;
   // TODO: Removing the old position
+
+  normalizeChessBoard();
+}
+
+function moveFigure(matrix, e, lastClickedFigure) {
+  // Box that the user clicked
+  let clickedBoxCoordinates = e.target.id.split('-');
+  // Box coordinates as object
+  let coordinatesObject = {x: Number(clickedBoxCoordinates[0]), y: Number(clickedBoxCoordinates[1])};
+  // Move the figure in the matrix
+  lastClickedFigure.renderPosition(matrix,coordinatesObject);
+  // Deleting old position on the chess board visually
+  document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).textContent = '';
+  // Update figure coordinates
+  lastClickedFigure.currentX = coordinatesObject.x;
+  lastClickedFigure.currentY = coordinatesObject.y;
+  // Display the figure visually on the new coordinates
+  document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).firstChild.textContent = lastClickedFigure.figureIcon;
+
   normalizeChessBoard();
 }
 
@@ -130,5 +149,6 @@ export default {
     handleFigureAnimation: handleFigureAnimation,
     changeBoxesColor: changeBoxesColor,
     normalizeChessBoard: normalizeChessBoard,
-    removeFigure: removeFigure
+    removeFigure: removeFigure,
+    moveFigure: moveFigure
 }
