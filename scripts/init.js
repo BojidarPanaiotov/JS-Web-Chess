@@ -22,10 +22,10 @@ chessBoardElement.addEventListener('click', function(e) {
     lastClickedFigure.currentX = coordinatesObject.x;
     lastClickedFigure.currentY = coordinatesObject.y;
     document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).firstChild.textContent = lastClickedFigure.figureIcon;
-    Game.returnBorderColors();
+    Game.normalizeChessBoard();
     return;
   } else if(canGet) {
-    console.log('can get');
+    Game.removeFigure(chessBoardMatrix, e, lastClickedFigure);
     return;
   }
 
@@ -38,5 +38,5 @@ chessBoardElement.addEventListener('click', function(e) {
     Game.changeBoxesColor(figure.color, chessBoardMatrix, figure.getPossibleMoves(chessBoardMatrix));
   }
 
-  console.log('D:MATRIX',chessBoardMatrix);
+  // console.log('D:MATRIX',chessBoardMatrix);
 });

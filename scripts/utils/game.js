@@ -58,7 +58,7 @@ function handleFigureAnimation(animationClass, e) {
   // If old figure has animation remove it
   if(animation) {
     animation.forEach(el => el.classList.remove(animationClass));
-    returnBorderColors();
+    normalizeChessBoard();
   }
 
   let isFigureClicked = e.target.parentNode.classList.contains('box');
@@ -85,32 +85,50 @@ function changeBoxesColor(currentFigureColor, matrix,coordinates) {
       box.style.backgroundColor = 'red';
       box.firstChild.classList.add('can-get');
     }
-
   }
 }
 
-function returnBorderColors() {
+function normalizeChessBoard() {
   // Rows
   for (let rowIndex = 0; rowIndex < 8; rowIndex++) {
 
     // Columns
     for (let boxIndex = 0; boxIndex < 8; boxIndex++) {
       let box = document.getElementById(rowIndex + '-' + boxIndex);
-
       if((boxIndex+rowIndex) % 2 === 1) {
         box.style.backgroundColor = '#E97451';
       } else {
         box.style.backgroundColor = '#FFFFFF';
       }
-
+      
       box.classList.remove('can-move');
     }
   }
 }
+
+function removeFigure(matrix, e, lastClickedFigure) {
+  // Getting figure as HTML element
+  var htmlFigure = document.getElementById(e.target.parentNode.id);
+  // Getting the figure as object
+  var arrayIndex = e.target.parentNode.id.split('-');
+  var figureObj = matrix[arrayIndex[0]][arrayIndex[1]];
+  // Removing the figure from the matrix
+  figureObj.destroy(matrix);
+  // Removing the figure from the DOM
+  htmlFigure.firstChild.textContent = '';
+  // Moving the other figure to this position in the matrix
+  lastClickedFigure.renderPosition(matrix,{x: arrayIndex[0],y: arrayIndex[1]});
+  // Moving it visually
+  htmlFigure.firstChild.textContent = lastClickedFigure.figureIcon;
+  // TODO: Removing the old position
+  normalizeChessBoard();
+}
+
 export default {
     getClickedFigureAsObject: getClickedFigureAsObject,
     drawChessBoard: drawChessBoard,
     handleFigureAnimation: handleFigureAnimation,
     changeBoxesColor: changeBoxesColor,
-    returnBorderColors: returnBorderColors
+    normalizeChessBoard: normalizeChessBoard,
+    removeFigure: removeFigure
 }

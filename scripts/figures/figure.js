@@ -28,4 +28,8 @@ export default class Figure {
     matrix[this.currentX][this.currentY] = null;
     matrix[coordinates.x][coordinates.y] = this;
   }
+
+  destroy(matrix) {
+    matrix[this.currentX][this.currentY] = null;
+  }
 }
