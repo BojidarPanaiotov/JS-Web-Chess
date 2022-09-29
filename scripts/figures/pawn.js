@@ -16,7 +16,7 @@ export default class Pawn extends Figure {
         let figureAllMoves = this.color === 'white' ? whiteMoves : blackMoves;
         let indexChecker = this.color === 'white' ? -1 : +1;
 
-        if(this.currentX+indexChecker === 8) {
+        if(this.currentX + indexChecker === 8 || this.currentX + indexChecker === -1) {
             console.log('special move');
             return;
         }
