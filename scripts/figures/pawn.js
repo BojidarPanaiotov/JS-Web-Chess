@@ -5,21 +5,6 @@ export default class Pawn extends Figure {
         super(initialX, initialY,figureIcon,color);
     }
 
-    move(matrix, clickedCoordinates) {
-        var possibleMoves = this.getPossibleMoves(matrix);
-        var canMove;
-        let clickedX = clickedCoordinates.x;
-        let clickedY = clickedCoordinates.y;
-
-        for (let i = 0; i < possibleMoves.length; i++) {
-            if(possibleMoves[i].x === clickedX && possibleMoves[i].y === clickedY) {
-                canMove = true;
-                this.renderPosition(matrix, clickedCoordinates)
-            }
-        }
-        return canMove;
-    }
-
     isFirstMove() {
         return this.initialX === this.currentX && this.initialY === this.currentY;
     }
@@ -73,11 +58,5 @@ export default class Pawn extends Figure {
         }
 
         return validCoordinates;
-    }
-
-    renderPosition(matrix, coordinates) {
-        // Matrix handling
-        matrix[this.currentX][this.currentY] = null;
-        matrix[coordinates.x][coordinates.y] = this;
     }
 }

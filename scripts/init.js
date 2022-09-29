@@ -37,4 +37,6 @@ chessBoardElement.addEventListener('click', function(e) {
   if(figure) {
     Game.changeBoxesColor(figure.color, chessBoardMatrix, figure.getPossibleMoves(chessBoardMatrix));
   }
+
+  console.log('D:MATRIX',chessBoardMatrix);
 });
