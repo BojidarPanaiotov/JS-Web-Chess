@@ -27,30 +27,26 @@ export default class Pawn extends Figure {
     getPossibleMoves(matrix) {
         let moves = [];
 
-        if(this.color === 'white') {
-            if(this.isFirstMove() && matrix[this.currentX-1][this.currentY] === null) {
-                moves.push({x: -2,y: 0});
-            }
-            if(matrix[this.currentX-1][this.currentY] === null) {
-                moves.push({x: -1,y: 0});
-            }
+        let whiteMoves = [{x: -2,y: 0},{x: -1,y: 0},{x: -1,y: -1},{x: -1,y: +1}];
+        let blackMoves = [{x: +2,y: 0},{x: +1,y: 0},{x: +1,y: +1},{x: +1,y: -1}];
 
-            moves.push({x: -1,y: -1});
-            moves.push({x: -1,y: +1});
-        } else {
-            if(this.isFirstMove() && matrix[this.currentX+1][this.currentY] === null) {
-                moves.push({x: +2,y: 0});
-            }
+        let figureAllMoves = this.color === 'white' ? whiteMoves : blackMoves;
+        let indexChecker = this.color === 'white' ? -1 : +1;
 
-            if(matrix[this.currentX+1][this.currentY] === null) {
-                moves.push({x: +1,y: 0});
-            }
-            moves.push({x: +1,y: +1});
-            moves.push({x: +1,y: -1});
+        // If is the first move of the pawn
+        if(this.isFirstMove() && matrix[this.currentX+indexChecker][this.currentY] === null) {
+            moves.push({x: figureAllMoves[0].x,y: figureAllMoves[0].y});
         }
-        let validCoordinates = this.calculateCoordinatesFromOrigin(matrix,moves);
 
-        return validCoordinates;
+        // IF there is a figure in front of the pawn
+        if(matrix[this.currentX+indexChecker][this.currentY] === null) {
+            moves.push({x: figureAllMoves[1].x,y: figureAllMoves[1].y});
+        }
+
+        moves.push({x: figureAllMoves[2].x,y: figureAllMoves[2].y});
+        moves.push({x: figureAllMoves[3].x,y: figureAllMoves[3].y});
+
+        return this.calculateCoordinatesFromOrigin(matrix,moves);
     }
 
     calculateCoordinatesFromOrigin(matrix,coordinates) {
