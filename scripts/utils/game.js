@@ -83,6 +83,7 @@ function changeBoxesColor(currentFigureColor, matrix,coordinates) {
         continue;
       }
       box.style.backgroundColor = 'red';
+      box.firstChild.classList.add('can-get');
     }
 
   }

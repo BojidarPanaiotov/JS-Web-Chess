@@ -1,5 +1,4 @@
 import constants from './constants.js';
-import Figure from './figures/figure.js';
 import figures from './utils/figureToDraw.js';
 import Game from './utils/game.js';
 
@@ -13,6 +12,7 @@ Game.drawChessBoard(chessBoardElement,chessBoardMatrix,figures.figuresToDraw);
 // Listening for figure click
 chessBoardElement.addEventListener('click', function(e) {
   let canMove = e.target.classList.contains('can-move');
+  let canGet = e.target.classList.contains('can-get');
 
   if(canMove) {
     let clickedBoxCoordinates = e.target.id.split('-');
@@ -24,6 +24,9 @@ chessBoardElement.addEventListener('click', function(e) {
     document.getElementById(lastClickedFigure.currentX + '-' + lastClickedFigure.currentY).firstChild.textContent = lastClickedFigure.figureIcon;
     Game.returnBorderColors();
     return;
+  } else if(canGet) {
+    console.log('can get');
+    return;
   }
 
   let figure = Game.getClickedFigureAsObject(e,chessBoardMatrix);
@@ -34,6 +37,4 @@ chessBoardElement.addEventListener('click', function(e) {
   if(figure) {
     Game.changeBoxesColor(figure.color, chessBoardMatrix, figure.getPossibleMoves(chessBoardMatrix));
   }
-
-  console.log(chessBoardMatrix);
 });
