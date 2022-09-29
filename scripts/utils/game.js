@@ -104,6 +104,10 @@ function normalizeChessBoard() {
       box.classList.remove('can-move');
     }
   }
+
+  document.querySelectorAll('.can-get').forEach(box => {
+    box.classList.remove('can-get');
+  });
 }
 
 function removeFigure(matrix, e, lastClickedFigure) {
@@ -120,7 +124,10 @@ function removeFigure(matrix, e, lastClickedFigure) {
   lastClickedFigure.renderPosition(matrix,{x: arrayIndex[0],y: arrayIndex[1]});
   // Moving it visually
   htmlFigure.firstChild.textContent = lastClickedFigure.figureIcon;
-  // TODO: Removing the old position
+  // Removing the old position
+  var a =document.getElementById(lastClickedFigure.currentX+'-'+lastClickedFigure.currentY);
+  a.firstChild.textContent = '';
+  a.firstChild.classList.remove('idle-animation');
 
   normalizeChessBoard();
 }

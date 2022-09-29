@@ -21,6 +21,7 @@ chessBoardElement.addEventListener('click', function(e) {
   }
 
   if(canMove || canGet) {
+      console.log('D:MATRIX',chessBoardMatrix);
     return;
   }
 
