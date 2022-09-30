@@ -35,4 +35,29 @@ export default class Figure {
     this.currentX = x;
     this.currentY = y;
   }
+
+  calculateCoordinatesFromOrigin(matrix,coordinates) {
+    let validCoordinates = [];
+
+    for (let i = 0; i < coordinates.length; i++) {
+        let x = this.currentX + coordinates[i].x;
+        let y = this.currentY + coordinates[i].y;
+        /*  
+            1. Checking if the move is beyond the boundaries of the board
+            2. Checking if the current figure can take other figure
+            3. Else means that the box is empty
+        */
+        if(x < 0 || y < 0) {
+            continue;
+        } else if(this.currentY !== y){
+            if(matrix[x][y]) {
+                validCoordinates.push({x: x, y: y});
+            }
+        } else {
+            validCoordinates.push({x: x, y: y});
+        }
+    }
+
+    return validCoordinates;
+  }
 }
