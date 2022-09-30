@@ -42,22 +42,24 @@ export default class Figure {
     for (let i = 0; i < coordinates.length; i++) {
         let x = this.currentX + coordinates[i].x;
         let y = this.currentY + coordinates[i].y;
-        /*  
-            1. Checking if the move is beyond the boundaries of the board
-            2. Checking if the current figure can take other figure
-            3. Else means that the box is empty
-        */
-        if(x < 0 || y < 0) {
+
+        //  1. Checking if the move is beyond the boundaries of the board
+        if(this.validateCoordinates(x,y)) {
             continue;
-        } else if(this.currentY !== y){
-            if(matrix[x][y]) {
-                validCoordinates.push({x: x, y: y});
-            }
+          //  2. Checking if the current figure can take other figure
+        } else if(matrix[x][y]){
+          validCoordinates.push({x: x, y: y});
+          continue;
+          //  3. Else means that the box is empty
         } else {
             validCoordinates.push({x: x, y: y});
         }
     }
 
     return validCoordinates;
+  }
+
+  validateCoordinates(x, y) {
+    return x < 0 || x > 7 || y < 0 || x > 7;
   }
 }
