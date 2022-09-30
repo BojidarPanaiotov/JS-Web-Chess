@@ -15,16 +15,80 @@ export default class Rook extends Figure {
         // Moving forward
         for (let i = 1; i < 8; i++) {
             let helperIndex = indexChecker * i;
-            
+            let x = this.currentX+helperIndex;
+
             // Can move to this box
-            if(!this.isValidCoordinates(this.currentX+helperIndex,this.currentY) 
-                && matrix[this.currentX+helperIndex][this.currentY] === null) {
-                moves.push({x: this.currentX+helperIndex, y: this.currentY});
+            if(!this.isValidCoordinates(x,this.currentY) 
+                && matrix[x][this.currentY] === null) {
+                moves.push({x: x, y: this.currentY});
                 // If there is a figure to get
-            } else if(!this.isValidCoordinates(this.currentX+helperIndex,this.currentY)  
-                && matrix[this.currentX+helperIndex][this.currentY]
-                && matrix[this.currentX+helperIndex][this.currentY].color !== this.color){
-                moves.push({x: this.currentX+helperIndex, y: this.currentY});
+            } else if(!this.isValidCoordinates(x,this.currentY)  
+                && matrix[x][this.currentY]
+                && matrix[x][this.currentY].color !== this.color){
+                moves.push({x: x, y: this.currentY});
+                break;
+                // Else break because the figure reached max range
+            } else {
+                break;
+            }
+        }
+
+        // Moving backwards
+        for (let i = 1; i < 8; i++) {
+            let helperIndex = indexChecker * i;
+            let x = this.currentX-helperIndex;
+
+            // Can move to this box
+            if(!this.isValidCoordinates(x,this.currentY) 
+                && matrix[x][this.currentY] === null) {
+                moves.push({x: x, y: this.currentY});
+                // If there is a figure to get
+            } else if(!this.isValidCoordinates(x,this.currentY)  
+                && matrix[x][this.currentY]
+                && matrix[x][this.currentY].color !== this.color){
+                moves.push({x: x, y: this.currentY});
+                break;
+                // Else break because the figure reached max range
+            } else {
+                break;
+            }
+        }
+
+        // Moving to the left
+        for (let i = 1; i < 8; i++) {
+            let helperIndex = indexChecker * i;
+            let y = this.currentY-helperIndex;
+
+            // Can move to this box
+            if(!this.isValidCoordinates(this.currentX,y) 
+                && matrix[this.currentX][y] === null) {
+                moves.push({x: this.currentX, y: y});
+                // If there is a figure to get
+            } else if(!this.isValidCoordinates(this.currentX,y)  
+                && matrix[this.currentX][y]
+                && matrix[this.currentX][y].color !== this.color){
+                moves.push({x: this.currentX, y: y});
+                break;
+                // Else break because the figure reached max range
+            } else {
+                break;
+            }
+        }
+
+        // Moving to the right
+        for (let i = 1; i < 8; i++) {
+            let helperIndex = indexChecker * i;
+            let y = this.currentY+helperIndex;
+
+            // Can move to this box
+            if(!this.isValidCoordinates(this.currentX,y) 
+                && matrix[this.currentX][y] === null) {
+                moves.push({x: this.currentX, y: y});
+                // If there is a figure to get
+            } else if(!this.isValidCoordinates(this.currentX,y)  
+                && matrix[this.currentX][y]
+                && matrix[this.currentX][y].color !== this.color){
+                moves.push({x: this.currentX, y: y});
                 break;
                 // Else break because the figure reached max range
             } else {
