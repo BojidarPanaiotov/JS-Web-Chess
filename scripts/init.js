@@ -5,6 +5,7 @@ import Game from './utils/game.js';
 let chessBoardElement = document.getElementById(constants._chessBoard);
 let chessBoardMatrix = [];
 let lastClickedFigure;
+let timer = Game.startTimer();
 
 // Drawing chess field along with all figures
 Game.drawChessBoard(chessBoardElement,chessBoardMatrix,figures.figuresToDraw);
@@ -18,7 +19,7 @@ chessBoardElement.addEventListener('click', function(e) {
   if(canMove) {
     Game.moveFigure(chessBoardMatrix, e, lastClickedFigure)
   } else if(canGet) {
-    Game.removeFigure(chessBoardMatrix, e, lastClickedFigure);
+    Game.removeFigure(chessBoardMatrix, e, lastClickedFigure, timer);
   }
 
   if(canMove || canGet) {
@@ -34,5 +35,3 @@ chessBoardElement.addEventListener('click', function(e) {
     Game.changeBoxesColor(figure.color, chessBoardMatrix, figure.getPossibleMoves(chessBoardMatrix));
   }
 });
-
-Game.startTimer();

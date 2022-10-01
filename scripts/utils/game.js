@@ -110,7 +110,7 @@ function normalizeChessBoard() {
   });
 }
 
-function removeFigure(matrix, e, lastClickedFigure) {
+function removeFigure(matrix, e, lastClickedFigure, timer) {
   // Getting figure as HTML element
   var htmlFigure = document.getElementById(e.target.parentNode.id);
   // Getting the figure as object
@@ -132,8 +132,7 @@ function removeFigure(matrix, e, lastClickedFigure) {
   lastClickedFigure.updateCoordinates(Number(arrayIndex[0]),Number(arrayIndex[1]));
 
   if(endGame === 'End Game') {
-    console.log(figureObj.color + ' figures lost!');
-    stopGame(figureObj.color);
+    stopGame(figureObj.color, timer);
   }
   normalizeChessBoard();
 }
@@ -162,7 +161,7 @@ function getCoordinatesAsString(x,y) {
 }
 
 function startTimer() {
-  setInterval(function() {
+  return setInterval(function() {
     let timerElement = document.getElementById(constants._timer);
     let data = timerElement.textContent.split(constants._twoDots);
   
@@ -208,31 +207,34 @@ function startTimer() {
   }, 1000);
 }
 
-function stopGame(theFigureThatLostColor) {
+function stopGame(theFigureThatLostColor, timer) {
   let winner = ' White';
+  let timePlayed = document.getElementById(constants._timer).textContent;
   if(theFigureThatLostColor === 'white') {
     winner = ' Black'
   }
-document.querySelector('.wrapper').classList.remove('d-none')
-  // Get the modal
-var modal = document.getElementById("myModal");
-var modalMessage = document.querySelector('.modal-message').textContent += winner + ' figures won!';
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+  document.querySelector('.wrapper').classList.remove('d-none');
+    // Get the modal
+  var modal = document.getElementById("myModal");
+  document.querySelector('.modal-message').textContent += winner + ' figures won!' + ' The game continued ' +timePlayed;
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
 
-modal.style.display = "block";
+  modal.style.display = "block";
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
     modal.style.display = "none";
   }
-}
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  clearInterval(timer);
 }
 
 export default {
