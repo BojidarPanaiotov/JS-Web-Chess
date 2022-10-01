@@ -26,13 +26,7 @@ export default class King extends Figure {
                 y = self.currentY + helperIndex;
             }
 
-            if(!self.isValidCoordinates(x,y) && matrix[x][y] === null) {
-                moves.push({x: x, y: y});
-            } else if(!self.isValidCoordinates(x,y)  
-                && matrix[x][y]
-                && matrix[x][y].color !== self.color){
-                moves.push({x: x, y: y});
-            }
+            moves.push({x: x, y: y});
 
             // Moving horizontally
             if(a) {
@@ -49,13 +43,7 @@ export default class King extends Figure {
                 y = self.currentY - helperIndex;
             }
 
-            if(!self.isValidCoordinates(x,y) && matrix[x][y] === null) {
-                moves.push({x: x, y: y});
-            } else if(!self.isValidCoordinates(x,y)  
-                && matrix[x][y]
-                && matrix[x][y].color !== self.color) {
-                moves.push({x: x, y: y});
-            }
+            moves.push({x: x, y: y});
         };
 
         calculateMoves(this, matrix, this.currentX , this.currentY, moves, null, true, null, null);
