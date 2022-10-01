@@ -11,8 +11,8 @@ Game.drawChessBoard(chessBoardElement,chessBoardMatrix,figures.figuresToDraw);
 
 // Listening for figure click
 chessBoardElement.addEventListener('click', function(e) {
-  let canMove = e.target.classList.contains('can-move');
-  let canGet = e.target.classList.contains('can-get');
+  let canMove = e.target.classList.contains(constants._canMoveClass);
+  let canGet = e.target.classList.contains(constants._canGetClass);
 
   if(canMove) {
     Game.moveFigure(chessBoardMatrix, e, lastClickedFigure)

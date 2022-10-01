@@ -1,8 +1,10 @@
+import constants from '../constants.js';
+
 function getClickedFigureAsObject(event, matrix) {
     let figure;
   
-    if(event.target.parentNode.classList.contains('box')) {
-      let id = event.target.parentNode.id.split('-');
+    if(event.target.parentNode.classList.contains(constants._boxClass)) {
+      let id = event.target.parentNode.id.split(constants._splitSymbol);
       figure = matrix[id[0]][id[1]];
     }
   
@@ -26,12 +28,12 @@ function drawChessBoard(root,matrix,figures) {
       box.appendChild(iconPlaceholder);
 
       if((boxIndex+rowIndex) % 2 === 1) {
-        box.style.backgroundColor = '#E97451';
+        box.style.backgroundColor = constants._blackBoxColor;
       } else {
-        box.style.backgroundColor = '#FFFFFF';
+        box.style.backgroundColor = constants._whiteBoxColor;
       }
   
-      box.setAttribute('class','box');
+      box.setAttribute('class',constants._boxClass);
   
       row.appendChild(box);
 
@@ -53,7 +55,7 @@ function drawChessBoard(root,matrix,figures) {
 
 function handleFigureAnimation(animationClass, e) {
   // Find idle figure animation
-  let animation = document.querySelectorAll('.'+animationClass);
+  let animation = document.querySelectorAll(constants._dot+animationClass);
 
   // If old figure has animation remove it
   if(animation) {
@@ -61,7 +63,7 @@ function handleFigureAnimation(animationClass, e) {
     normalizeChessBoard();
   }
 
-  let isFigureClicked = e.target.parentNode.classList.contains('box');
+  let isFigureClicked = e.target.parentNode.classList.contains(constants._boxClass);
 
   // Adding animation to the new figure
   if(isFigureClicked) {
@@ -73,17 +75,17 @@ function changeBoxesColor(currentFigureColor, matrix,coordinates) {
   for (let i = 0; i < coordinates.length; i++) {
     let x = coordinates[i].x;
     let y = coordinates[i].y;
-    let box = document.getElementById(x+'-'+y);
+    let box = document.getElementById(x+constants._splitSymbol+y);
 
     if(matrix[x][y] === null) {
-      box.style.backgroundColor = '#4CBB17';
-      box.classList.add('can-move');
+      box.style.backgroundColor = constants._canMoveBoxColor;
+      box.classList.add(constants._canMoveClass);
     } else {
       if(matrix[x][y].color === currentFigureColor) {
         continue;
       }
-      box.style.backgroundColor = 'red';
-      box.firstChild.classList.add('can-get');
+      box.style.backgroundColor = constants._canGetBoxColor;
+      box.firstChild.classList.add(constants._canGetClass);
     }
   }
 }
@@ -94,17 +96,17 @@ function normalizeChessBoard() {
     for (let boxIndex = 0; boxIndex < 8; boxIndex++) {
       let box = document.getElementById(getCoordinatesAsString(rowIndex, boxIndex));
       if((boxIndex+rowIndex) % 2 === 1) {
-        box.style.backgroundColor = '#E97451';
+        box.style.backgroundColor = constants._blackBoxColor;
       } else {
-        box.style.backgroundColor = '#FFFFFF';
+        box.style.backgroundColor = constants._whiteBoxColor;
       }
       
-      box.classList.remove('can-move');
+      box.classList.remove(constants._canMoveClass);
     }
   }
 
-  document.querySelectorAll('.can-get').forEach(box => {
-    box.classList.remove('can-get');
+  document.querySelectorAll(constants._dot + constants._canGetClass).forEach(box => {
+    box.classList.remove(constants._canGetClass);
   });
 }
 
@@ -112,20 +114,20 @@ function removeFigure(matrix, e, lastClickedFigure) {
   // Getting figure as HTML element
   var htmlFigure = document.getElementById(e.target.parentNode.id);
   // Getting the figure as object
-  var arrayIndex = e.target.parentNode.id.split('-');
+  var arrayIndex = e.target.parentNode.id.split(constants._splitSymbol);
   var figureObj = matrix[arrayIndex[0]][arrayIndex[1]];
   // Removing the figure from the matrix
   var endGame = figureObj.destroy(matrix);
   // Removing the figure from the DOM
-  htmlFigure.firstChild.textContent = '';
+  htmlFigure.firstChild.textContent = constants._emptyString;
   // Moving the other figure to this position in the matrix
   lastClickedFigure.handlePosition(matrix,{x: arrayIndex[0],y: arrayIndex[1]});
   // Moving it visually
   htmlFigure.firstChild.textContent = lastClickedFigure.figureIcon;
   // Removing the old position
-  var a =document.getElementById(lastClickedFigure.currentX+'-'+lastClickedFigure.currentY);
-  a.firstChild.textContent = '';
-  a.firstChild.classList.remove('idle-animation');
+  var a =document.getElementById(lastClickedFigure.currentX+constants._splitSymbol+lastClickedFigure.currentY);
+  a.firstChild.textContent = constants._emptyString;
+  a.firstChild.classList.remove(constants._idleAnimation);
   // Update figure coordinates
   lastClickedFigure.updateCoordinates(Number(arrayIndex[0]),Number(arrayIndex[1]));
 
@@ -137,15 +139,15 @@ function removeFigure(matrix, e, lastClickedFigure) {
 
 function moveFigure(matrix, e, lastClickedFigure) {
   // Box that the user clicked
-  let clickedBoxCoordinates = e.target.id.split('-');
+  let clickedBoxCoordinates = e.target.id.split(constants._splitSymbol);
   // Box coordinates as object
   let coordinatesObject = {x: Number(clickedBoxCoordinates[0]), y: Number(clickedBoxCoordinates[1])};
   // Move the figure in the matrix
   lastClickedFigure.handlePosition(matrix,coordinatesObject);
   // Deleting old position on the chess board visually
   var oldBox = document.getElementById(getCoordinatesAsString(lastClickedFigure.currentX, lastClickedFigure.currentY)).firstChild;
-  oldBox.textContent = '';
-  oldBox.classList.remove('idle-animation');
+  oldBox.textContent = constants._emptyString;
+  oldBox.classList.remove(constants._idleAnimation);
   // Update figure coordinates
   lastClickedFigure.updateCoordinates(coordinatesObject.x, coordinatesObject.y);
   // Display the figure visually on the new coordinates
@@ -155,7 +157,7 @@ function moveFigure(matrix, e, lastClickedFigure) {
 }
 
 function getCoordinatesAsString(x,y) {
-  return x + '-' + y;
+  return x + constants._splitSymbol + y;
 }
 
 export default {
