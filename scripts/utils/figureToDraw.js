@@ -5,7 +5,7 @@ import Knight from '../figures/knight.js';
 import Queen from '../figures/queen.js';
 import King from '../figures/king.js';
 
-import constants from '../constants.js';
+import constants from './constants.js';
 
 let figuresToDraw = [
     // Black Figures

@@ -1,4 +1,4 @@
-import constants from './constants.js';
+import constants from './utils/constants.js';
 import figures from './utils/figureToDraw.js';
 import Game from './utils/game.js';
 
