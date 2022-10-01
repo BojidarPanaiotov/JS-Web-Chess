@@ -37,13 +37,11 @@ export default class Pawn extends Figure {
         }
         // If there is a figure diagonally on left
         if(matrix[this.currentX + figureAllMoves[2].x][this.currentY + figureAllMoves[2].y]) {
-            console.log(matrix[this.currentX + figureAllMoves[2].x][this.currentY + figureAllMoves[2].y]);
             moves.push({x: figureAllMoves[2].x,y: figureAllMoves[2].y});
         }
 
         // If there is a figure diagonally on right
         if(matrix[this.currentX + figureAllMoves[3].x][this.currentY + figureAllMoves[3].y]) {
-            console.log(matrix[this.currentX + figureAllMoves[3].x][this.currentY + figureAllMoves[3].y]);
             moves.push({x: figureAllMoves[3].x,y: figureAllMoves[3].y});
         }
 
