@@ -71,5 +71,5 @@ export default class Pawn extends Figure {
         }
     
         return validCoordinates;
-      }
+    }
 }
