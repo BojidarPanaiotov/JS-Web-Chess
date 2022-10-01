@@ -4,6 +4,11 @@
     margin: 0 auto;
 }
 
+#timer {
+    margin: 1em auto;
+    text-align: center;
+    font-size: 2em;
+}
 .row {
     display: flex;
     flex-direction: row;

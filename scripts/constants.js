@@ -11,6 +11,10 @@ const _canGetBoxColor = '#FF0000';
 const _blackBoxColor = '#E97451';
 const _whiteBoxColor = '#FFFFFF';
 
+// Selectors
+const _chessBoard = 'chess-board';
+const _timer = 'timer';
+
 // Black Figures
 const _blackPawn = '♟';
 const _blackRook = '♜';
@@ -31,6 +35,8 @@ const _whiteKing = '♔';
 const _splitSymbol = '-';
 const _emptyString = '';
 const _dot = '.';
+const _twoDots = ':';
+const _zero = '0';
 
 export default {
     _white: _white,
@@ -44,6 +50,9 @@ export default {
     _canGetBoxColor: _canGetBoxColor,
     _blackBoxColor: _blackBoxColor,
     _whiteBoxColor: _whiteBoxColor,
+    // Selectors
+    _chessBoard: _chessBoard,
+    _timer: _timer,
     // Black Figures
     _blackPawn: _blackPawn,
     _blackRook: _blackRook,
@@ -61,5 +70,7 @@ export default {
     // Symbols
     _splitSymbol: _splitSymbol,
     _emptyString: _emptyString,
-    _dot: _dot
+    _dot: _dot,
+    _twoDots: _twoDots,
+    _zero: _zero
 }

@@ -160,6 +160,53 @@ function getCoordinatesAsString(x,y) {
   return x + constants._splitSymbol + y;
 }
 
+function startTimer() {
+  setInterval(function() {
+    let timerElement = document.getElementById(constants._timer);
+    let data = timerElement.textContent.split(constants._twoDots);
+  
+    let time = [
+      // Hours
+      Number(data[0]),
+      // Minutes
+      Number(data[1]),
+      // Seconds
+      Number(data[2])
+    ];
+  
+    // Increasing seconds
+    time[2] += 1;
+  
+    if(time[2] === 60) {
+      // Resetting seconds
+      time[2] = 0;
+      // Adding one to the minute
+      time[1] += 1;
+    }
+  
+    if(time[1] === 60) {
+      // Adding one to the hour
+      time[0] += 1;
+      // Resetting minutes
+      time[1] = 0;
+      // Resetting seconds
+      time[2] = 0;
+    }
+
+    let timeAsString = [];
+
+    time.map(el => {
+      if(el.toString().length === 1) {
+        timeAsString.push(constants._zero + el.toString());
+      } else {
+        timeAsString.push(el.toString());
+      }
+    });
+
+    timerElement.textContent = timeAsString[0] + constants._twoDots + timeAsString[1] + constants._twoDots + timeAsString[2];
+  }, 1000);
+}
+
 export default {
     getClickedFigureAsObject: getClickedFigureAsObject,
     drawChessBoard: drawChessBoard,
@@ -168,5 +215,6 @@ export default {
     normalizeChessBoard: normalizeChessBoard,
     removeFigure: removeFigure,
     moveFigure: moveFigure,
-    getCoordinatesAsString: getCoordinatesAsString
+    getCoordinatesAsString: getCoordinatesAsString,
+    startTimer: startTimer
 }
