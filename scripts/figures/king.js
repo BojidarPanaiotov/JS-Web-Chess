@@ -65,4 +65,10 @@ export default class King extends Figure {
         
         return this.calculateCoordinatesFromOrigin(matrix,moves);
     }
+
+    destroy(matrix) {
+        matrix[this.currentX][this.currentY] = null;
+        
+        return 'End Game';
+    }
 }

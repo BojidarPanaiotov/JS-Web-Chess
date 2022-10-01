@@ -115,7 +115,7 @@ function removeFigure(matrix, e, lastClickedFigure) {
   var arrayIndex = e.target.parentNode.id.split('-');
   var figureObj = matrix[arrayIndex[0]][arrayIndex[1]];
   // Removing the figure from the matrix
-  figureObj.destroy(matrix);
+  var endGame = figureObj.destroy(matrix);
   // Removing the figure from the DOM
   htmlFigure.firstChild.textContent = '';
   // Moving the other figure to this position in the matrix
@@ -129,6 +129,9 @@ function removeFigure(matrix, e, lastClickedFigure) {
   // Update figure coordinates
   lastClickedFigure.updateCoordinates(Number(arrayIndex[0]),Number(arrayIndex[1]));
 
+  if(endGame === 'End Game') {
+    console.log(figureObj.color + ' figures lost!');
+  }
   normalizeChessBoard();
 }
 
