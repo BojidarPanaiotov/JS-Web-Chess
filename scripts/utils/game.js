@@ -133,6 +133,7 @@ function removeFigure(matrix, e, lastClickedFigure) {
 
   if(endGame === 'End Game') {
     console.log(figureObj.color + ' figures lost!');
+    stopGame(figureObj.color);
   }
   normalizeChessBoard();
 }
@@ -207,6 +208,33 @@ function startTimer() {
   }, 1000);
 }
 
+function stopGame(theFigureThatLostColor) {
+  let winner = ' White';
+  if(theFigureThatLostColor === 'white') {
+    winner = ' Black'
+  }
+document.querySelector('.wrapper').classList.remove('d-none')
+  // Get the modal
+var modal = document.getElementById("myModal");
+var modalMessage = document.querySelector('.modal-message').textContent += winner + ' figures won!';
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+modal.style.display = "block";
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+}
+
 export default {
     getClickedFigureAsObject: getClickedFigureAsObject,
     drawChessBoard: drawChessBoard,
@@ -216,5 +244,6 @@ export default {
     removeFigure: removeFigure,
     moveFigure: moveFigure,
     getCoordinatesAsString: getCoordinatesAsString,
-    startTimer: startTimer
+    startTimer: startTimer,
+    stopGame: stopGame
 }
