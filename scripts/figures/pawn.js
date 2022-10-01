@@ -28,46 +28,23 @@ export default class Pawn extends Figure {
             && matrix[this.currentX+indexChecker][this.currentY] === null
             // Second box is empty
             && matrix[this.currentX+indexChecker+indexChecker][this.currentY] === null) {
-            moves.push({x: figureAllMoves[0].x,y: figureAllMoves[0].y});
+            moves.push({x: this.currentX + figureAllMoves[0].x,y: this.currentY + figureAllMoves[0].y});
         }
 
         // IF there is a figure in front of the pawn
         if(matrix[this.currentX+indexChecker][this.currentY] === null) {
-            moves.push({x: figureAllMoves[1].x,y: figureAllMoves[1].y});
+            moves.push({x: this.currentX + figureAllMoves[1].x,y: this.currentY + figureAllMoves[1].y});
         }
         // If there is a figure diagonally on left
         if(matrix[this.currentX + figureAllMoves[2].x][this.currentY + figureAllMoves[2].y]) {
-            moves.push({x: figureAllMoves[2].x,y: figureAllMoves[2].y});
+            moves.push({x: this.currentX + figureAllMoves[2].x,y: this.currentY + figureAllMoves[2].y});
         }
 
         // If there is a figure diagonally on right
         if(matrix[this.currentX + figureAllMoves[3].x][this.currentY + figureAllMoves[3].y]) {
-            moves.push({x: figureAllMoves[3].x,y: figureAllMoves[3].y});
+            moves.push({x: this.currentX + figureAllMoves[3].x,y: this.currentY + figureAllMoves[3].y});
         }
 
         return this.calculateCoordinatesFromOrigin(matrix,moves);
-    }
-
-    calculateCoordinatesFromOrigin(matrix,coordinates) {
-        let validCoordinates = [];
-    
-        for (let i = 0; i < coordinates.length; i++) {
-          let x = this.currentX + coordinates[i].x;
-          let y = this.currentY + coordinates[i].y;
-    
-          //  1. Checking if the move is beyond the boundaries of the board
-          if(this.isValidCoordinates(x,y)) {
-              continue;
-            //  2. Checking if the current figure can take other figure
-          } else if(matrix[x][y]){
-            validCoordinates.push({x: x, y: y});
-            continue;
-            //  3. Else means that the box is empty
-          } else {
-              validCoordinates.push({x: x, y: y});
-          }
-        }
-    
-        return validCoordinates;
     }
 }
