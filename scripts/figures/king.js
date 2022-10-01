@@ -59,4 +59,39 @@ export default class King extends Figure {
         
         return 'End Game';
     }
+
+    isCheck(matrix) {
+        // Get all figures from the opposite color
+        let figures = [];
+        for (let row = 0; row < matrix.length; row++) {
+            for (let col = 0; col < matrix.length; col++) {
+                let currentFigure = matrix[row][col];
+
+                if(currentFigure === null) {
+                    continue;
+                } else if(currentFigure.color !== this.color) {
+                    figures.push(currentFigure);
+                }
+            }
+        }
+
+        // Check if one of those figure can get the King
+        let canGetTheKing = false;
+        for (let i = 0; i < figures.length; i++) {
+            let figure = figures[i];
+            let moves = figure.getPossibleMoves(matrix);
+
+            for (let j = 0; j < moves.length; j++) {
+                let move = moves[j];
+
+                if(move.x === this.currentX && move.y === this.currentY) {
+                    canGetTheKing = true;
+                    break;
+                }
+                
+            }
+        }
+
+        return canGetTheKing;
+    }
 }
