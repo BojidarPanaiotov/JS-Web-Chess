@@ -1,4 +1,5 @@
 import constants from './constants.js';
+import King from '../figures/king.js';
 
 function getClickedFigureAsObject(event, matrix) {
     let figure;
@@ -237,6 +238,22 @@ function stopGame(theFigureThatLostColor, timer) {
   clearInterval(timer);
 }
 
+function getKing(matrix, color) {
+  let king;
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix.length; col++) {
+      let currentFigure = matrix[row][col];
+      
+      if(currentFigure instanceof King && currentFigure.color === color) {
+        king = currentFigure;
+      }
+    }
+  }
+
+  return king;
+}
+
 export default {
     getClickedFigureAsObject: getClickedFigureAsObject,
     drawChessBoard: drawChessBoard,
@@ -247,5 +264,6 @@ export default {
     moveFigure: moveFigure,
     getCoordinatesAsString: getCoordinatesAsString,
     startTimer: startTimer,
-    stopGame: stopGame
+    stopGame: stopGame, 
+    getKing: getKing
 }
