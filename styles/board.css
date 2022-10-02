@@ -4,7 +4,8 @@
     margin: 0 auto;
 }
 
-#timer {
+#timer,
+#move {
     margin: 1em auto;
     text-align: center;
     font-size: 2em;

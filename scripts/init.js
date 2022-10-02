@@ -28,6 +28,7 @@ chessBoardElement.addEventListener('click', function(e) {
   
   if(canMove || canGet) {
     whichColorTurnIs = whichColorTurnIs === constants._white ? constants._black : constants._white;
+    Game.printWhichPlayerTurnIs(whichColorTurnIs);
     return;
   }
 
@@ -46,4 +47,5 @@ chessBoardElement.addEventListener('click', function(e) {
   if(figure) {
     Game.changeBoxesColor(figure.color, chessBoardMatrix, figure.getPossibleMoves(chessBoardMatrix));
   }
+
 });
