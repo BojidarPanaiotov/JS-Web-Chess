@@ -254,6 +254,10 @@ function getKing(matrix, color) {
   return king;
 }
 
+function handleTurns(colorTurn, lastClickedFigure) {
+  return colorTurn !== lastClickedFigure.color;
+}
+
 export default {
     getClickedFigureAsObject: getClickedFigureAsObject,
     drawChessBoard: drawChessBoard,
@@ -265,5 +269,6 @@ export default {
     getCoordinatesAsString: getCoordinatesAsString,
     startTimer: startTimer,
     stopGame: stopGame, 
-    getKing: getKing
+    getKing: getKing,
+    handleTurns: handleTurns
 }
