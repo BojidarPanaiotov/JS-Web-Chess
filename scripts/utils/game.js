@@ -258,22 +258,22 @@ function handleTurns(colorTurn, lastClickedFigure) {
   return colorTurn !== lastClickedFigure.color;
 }
 
-function printWhichPlayerTurnIs(playerColor) {
+function printPlayerTurn(playerColor) {
   document.getElementById('move').textContent = playerColor + ' turn';
 }
 
 export default {
-    getClickedFigureAsObject: getClickedFigureAsObject,
-    drawChessBoard: drawChessBoard,
-    handleFigureAnimation: handleFigureAnimation,
-    changeBoxesColor: changeBoxesColor,
-    normalizeChessBoard: normalizeChessBoard,
-    removeFigure: removeFigure,
-    moveFigure: moveFigure,
-    getCoordinatesAsString: getCoordinatesAsString,
-    startTimer: startTimer,
-    stopGame: stopGame, 
-    getKing: getKing,
-    handleTurns: handleTurns,
-    printWhichPlayerTurnIs: printWhichPlayerTurnIs
+    getClickedFigureAsObject,
+    drawChessBoard,
+    handleFigureAnimation,
+    changeBoxesColor,
+    normalizeChessBoard,
+    removeFigure,
+    moveFigure,
+    getCoordinatesAsString,
+    startTimer,
+    stopGame, 
+    getKing,
+    handleTurns,
+    printPlayerTurn
 }
