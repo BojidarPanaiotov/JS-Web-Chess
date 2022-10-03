@@ -34,7 +34,11 @@ chessBoardElement.addEventListener('click', function(e) {
 
   // Means that player just clicked a figure
   let figure = Game.getClickedFigureAsObject(e,matrix);
-  lastClickedFigure = figure;
+
+  // Actually clicked a figure
+  if(figure) {
+    lastClickedFigure = figure;
+  }
 
   // Checking the turn
   let turn = Game.handleTurns(whichColorTurnIs, lastClickedFigure);
@@ -47,5 +51,4 @@ chessBoardElement.addEventListener('click', function(e) {
   if(figure) {
     Game.changeBoxesColor(figure.color, matrix, figure.getPossibleMoves(matrix));
   }
-
 });
