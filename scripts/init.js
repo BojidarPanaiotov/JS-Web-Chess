@@ -3,27 +3,27 @@ import figures from './utils/figureToDraw.js';
 import Game from './utils/game.js';
 
 let chessBoardElement = document.getElementById(constants._chessBoard);
-let chessBoardMatrix = [];
+let matrix = [];
 let lastClickedFigure;
 let whichColorTurnIs = constants._white;
 let timer = Game.startTimer();
 
 // Drawing chess field along with all figures
-Game.drawChessBoard(chessBoardElement,chessBoardMatrix,figures.figuresToDraw);
+Game.drawChessBoard(chessBoardElement,matrix,figures.figuresToDraw);
 
 // Listening for figure click
 chessBoardElement.addEventListener('click', function(e) {
   let canMove = e.target.classList.contains(constants._canMoveClass);
   let canGet = e.target.classList.contains(constants._canGetClass);
 
-  let whiteKing = Game.getKing(chessBoardMatrix, constants._white);
-  let blackKing = Game.getKing(chessBoardMatrix, constants._black);
+  let whiteKing = Game.getKing(matrix, constants._white);
+  let blackKing = Game.getKing(matrix, constants._black);
 
   // Means that the player is moving his figure or getting enemy one
   if(canMove) {
-    Game.moveFigure(chessBoardMatrix, e, lastClickedFigure);
+    Game.moveFigure(matrix, e, lastClickedFigure);
   } else if(canGet) {
-    Game.removeFigure(chessBoardMatrix, e, lastClickedFigure, timer);
+    Game.removeFigure(matrix, e, lastClickedFigure, timer);
   }
   
   if(canMove || canGet) {
@@ -33,10 +33,10 @@ chessBoardElement.addEventListener('click', function(e) {
   }
 
   // Means that player just clicked a figure
-  let figure = Game.getClickedFigureAsObject(e,chessBoardMatrix);
+  let figure = Game.getClickedFigureAsObject(e,matrix);
   lastClickedFigure = figure;
 
-  // Checking the who turn is
+  // Checking the turn
   let turn = Game.handleTurns(whichColorTurnIs, lastClickedFigure);
 
   if(turn) {
@@ -45,7 +45,7 @@ chessBoardElement.addEventListener('click', function(e) {
   Game.handleFigureAnimation(constants._idleAnimation, e);
   
   if(figure) {
-    Game.changeBoxesColor(figure.color, chessBoardMatrix, figure.getPossibleMoves(chessBoardMatrix));
+    Game.changeBoxesColor(figure.color, matrix, figure.getPossibleMoves(matrix));
   }
 
 });

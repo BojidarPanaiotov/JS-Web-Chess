@@ -85,6 +85,7 @@ function changeBoxesColor(currentFigureColor, matrix,coordinates) {
       if(matrix[x][y].color === currentFigureColor) {
         continue;
       }
+
       box.style.backgroundColor = constants._canGetBoxColor;
       box.firstChild.classList.add(constants._canGetClass);
     }

@@ -37,7 +37,7 @@ export default class Figure {
   }
 
   isValidCoordinates(x, y) {
-    return x > 0 && x < 8 && y > 0 && x < 8;
+    return x >= 0 && x <= 7 && y >= 0 && x <= 7;
   }
 
   calculateCoordinatesFromOrigin(matrix,coordinates) {
