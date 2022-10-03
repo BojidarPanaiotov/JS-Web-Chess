@@ -28,9 +28,9 @@ export default class Bishop extends Figure {
                     y = self.currentY - i;
                 }
     
-                if(!self.isValidCoordinates(x,y) && matrix[x][y] === null) {
+                if(self.isValidCoordinates(x,y) && matrix[x][y] === null) {
                     moves.push({x: x, y: y});
-                } else if(!self.isValidCoordinates(x,y)  
+                } else if(self.isValidCoordinates(x,y)  
                     && matrix[x][y]
                     && matrix[x][y].color !== self.color) {
                     moves.push({x: x, y: y});

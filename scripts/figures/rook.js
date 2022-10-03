@@ -27,11 +27,11 @@ export default class Rook extends Figure {
                 }
     
                 // Can move to this box
-                if(!self.isValidCoordinates(x,y) 
+                if(self.isValidCoordinates(x,y) 
                     && matrix[x][y] === null) {
                     moves.push({x: x, y: y});
                     // If there is a figure to get
-                } else if(!self.isValidCoordinates(x,y)  
+                } else if(self.isValidCoordinates(x,y)  
                     && matrix[x][y]
                     && matrix[x][y].color !== self.color){
                     moves.push({x: x, y: y});

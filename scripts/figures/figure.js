@@ -37,7 +37,7 @@ export default class Figure {
   }
 
   isValidCoordinates(x, y) {
-    return x < 0 || x > 7 || y < 0 || x > 7;
+    return x > 0 && x < 8 && y > 0 && x < 8;
   }
 
   calculateCoordinatesFromOrigin(matrix,coordinates) {
@@ -48,7 +48,7 @@ export default class Figure {
       let y = coordinates[i].y;
 
       //  1. Checking if the move is beyond the boundaries of the board
-      if(this.isValidCoordinates(x,y)) {
+      if(!this.isValidCoordinates(x,y)) {
           continue;
         //  2. Checking if the current figure can take other figure
       } else if(matrix[x][y]){

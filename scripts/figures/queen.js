@@ -28,10 +28,10 @@ export default class Queen extends Figure {
                 }
     
                 // Can move to this box
-                if(!self.isValidCoordinates(x,y) && matrix[x][y] === null) {
+                if(self.isValidCoordinates(x,y) && matrix[x][y] === null) {
                     moves.push({x: x, y: y});
                     // If there is a figure to get
-                } else if(!self.isValidCoordinates(x,y)  
+                } else if(self.isValidCoordinates(x,y)  
                     && matrix[x][y]
                     && matrix[x][y].color !== self.color){
                     moves.push({x: x, y: y});
@@ -58,9 +58,9 @@ export default class Queen extends Figure {
                     y = self.currentY - i;
                 }
     
-                if(!self.isValidCoordinates(x,y) && matrix[x][y] === null) {
+                if(self.isValidCoordinates(x,y) && matrix[x][y] === null) {
                     moves.push({x: x, y: y});
-                } else if(!self.isValidCoordinates(x,y)  
+                } else if(self.isValidCoordinates(x,y)  
                     && matrix[x][y]
                     && matrix[x][y].color !== self.color) {
                     moves.push({x: x, y: y});
