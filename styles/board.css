@@ -1,3 +1,17 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
 #chess-board {
     border: 1px solid black;
     width: 640px;
@@ -10,6 +24,7 @@
     text-align: center;
     font-size: 2em;
 }
+
 .row {
     display: flex;
     flex-direction: row;
