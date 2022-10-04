@@ -62,4 +62,25 @@ export default class Figure {
 
     return validCoordinates;
   }
+
+  isValidMove(matrix, x, y, self, moves) {
+    let breakFlag = false;
+
+    // Can move to the current position
+    if(self.isValidCoordinates(x,y) && matrix[x][y] === null) {
+      moves.push({x: x, y: y});
+      // If there is a figure to get and break
+    } else if(self.isValidCoordinates(x,y)  
+      && matrix[x][y]
+      && matrix[x][y].color !== self.color) {
+      moves.push({x: x, y: y});
+      breakFlag = true;
+      // Else break because the figure reached max range
+    } else {
+      breakFlag = true;
+    }
+
+    // True if the figure reached out the maximum possible position in any direction
+    return breakFlag;
+  }
 }

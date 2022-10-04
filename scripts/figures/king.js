@@ -11,7 +11,7 @@ export default class King extends Figure {
 
         let moves = this.color === 'white' ? whiteMoves : blackMoves;
 
-        const calculateMoves = function(self, matrix, x, y, moves, a, b, c, d) {
+        const calculateMoves = function(self, x, y, moves, a, b, c, d) {
             let indexChecker = self.color === 'white' ? -1 : +1;
             let helperIndex = indexChecker * 1;
 
@@ -46,10 +46,10 @@ export default class King extends Figure {
             moves.push({x: x, y: y});
         };
 
-        calculateMoves(this, matrix, this.currentX , this.currentY, moves, null, true, null, null);
-        calculateMoves(this, matrix, this.currentX , this.currentY, moves, true, null, null, null);
-        calculateMoves(this, matrix, this.currentX , this.currentY, moves, null, null, true, null);
-        calculateMoves(this, matrix, this.currentX , this.currentY, moves, null, null, null, true);
+        calculateMoves(this, this.currentX , this.currentY, moves, null, true, null, null);
+        calculateMoves(this, this.currentX , this.currentY, moves, true, null, null, null);
+        calculateMoves(this, this.currentX , this.currentY, moves, null, null, true, null);
+        calculateMoves(this, this.currentX , this.currentY, moves, null, null, null, true);
         
         return this.calculateCoordinatesFromOrigin(matrix,moves);
     }
