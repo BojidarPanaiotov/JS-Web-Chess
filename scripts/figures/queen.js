@@ -27,17 +27,9 @@ export default class Queen extends Figure {
                     y = self.currentY + helperIndex;
                 }
     
-                // Can move to this box
-                if(self.isValidCoordinates(x,y) && matrix[x][y] === null) {
-                    moves.push({x: x, y: y});
-                    // If there is a figure to get
-                } else if(self.isValidCoordinates(x,y)  
-                    && matrix[x][y]
-                    && matrix[x][y].color !== self.color){
-                    moves.push({x: x, y: y});
-                    break;
-                    // Else break because the figure reached max range
-                } else {
+                let breakFlag = self.isValidMove(matrix, x, y, self, moves);
+
+                if(breakFlag) {
                     break;
                 }
             }
@@ -58,14 +50,9 @@ export default class Queen extends Figure {
                     y = self.currentY - i;
                 }
     
-                if(self.isValidCoordinates(x,y) && matrix[x][y] === null) {
-                    moves.push({x: x, y: y});
-                } else if(self.isValidCoordinates(x,y)  
-                    && matrix[x][y]
-                    && matrix[x][y].color !== self.color) {
-                    moves.push({x: x, y: y});
-                    break;
-                } else {
+                let breakFlag = self.isValidMove(matrix, x, y, self, moves);
+
+                if(breakFlag) {
                     break;
                 }
             }
