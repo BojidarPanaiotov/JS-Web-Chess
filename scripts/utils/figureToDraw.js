@@ -58,5 +58,5 @@ let figuresToDraw = [
 ];
 
 export default {
-    figuresToDraw: figuresToDraw
+    figuresToDraw
 }
