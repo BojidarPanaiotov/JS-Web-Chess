@@ -1,16 +1,12 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
 #background {
     position: absolute;
     display: block;
     top: 0;
     left: 0;
     z-index: -1;
-  }
+    background: rgb(195,180,180);
+    background: linear-gradient(34deg, rgba(195,180,180,1) 0%, rgba(242,255,255,1) 51%, rgba(175,167,167,1) 100%);
+}
 
 #chess-board {
     border: 1px solid black;

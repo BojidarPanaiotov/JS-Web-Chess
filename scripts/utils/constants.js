@@ -6,10 +6,10 @@ const _idleAnimation = 'idle-animation';
 const _canMoveClass = 'can-move';
 const _canGetClass = 'can-get';
 const _boxClass = 'box';
-const _canMoveBoxColor = '#4CBB17';
-const _canGetBoxColor = '#FF0000';
-const _blackBoxColor = '#E97451';
-const _whiteBoxColor = '#FFFFFF';
+const _canMoveBoxColor = 'linear-gradient(34deg, rgba(64,75,105,1) 0%, rgba(73,200,97,1) 50%, rgba(9,231,8,1) 100%)';
+const _canGetBoxColor = 'linear-gradient(34deg, rgba(64,75,105,1) 0%, rgba(200,98,73,1) 50%, rgba(231,8,8,1) 100%)';
+const _blackBoxColor = 'linear-gradient(34deg, rgba(64,75,105,1) 0%, rgba(181,196,237,1) 100%)';
+const _whiteBoxColor = 'linear-gradient(34deg, rgba(246,235,235,1) 0%, rgba(199,215,215,1) 50%, rgba(255,255,255,1) 100%)';
 
 // Selectors
 const _chessBoard = 'chess-board';

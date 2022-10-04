@@ -29,9 +29,9 @@ function drawChessBoard(root,matrix,figures) {
       box.appendChild(iconPlaceholder);
 
       if((boxIndex+rowIndex) % 2 === 1) {
-        box.style.backgroundColor = constants._blackBoxColor;
+        box.style.background = constants._blackBoxColor;
       } else {
-        box.style.backgroundColor = constants._whiteBoxColor;
+        box.style.background = constants._whiteBoxColor;
       }
   
       box.setAttribute('class',constants._boxClass);
@@ -79,14 +79,14 @@ function changeBoxesColor(currentFigureColor, matrix,coordinates) {
     let box = document.getElementById(x+constants._splitSymbol+y);
 
     if(matrix[x][y] === null) {
-      box.style.backgroundColor = constants._canMoveBoxColor;
+      box.style.background = constants._canMoveBoxColor;
       box.classList.add(constants._canMoveClass);
     } else {
       if(matrix[x][y].color === currentFigureColor) {
         continue;
       }
 
-      box.style.backgroundColor = constants._canGetBoxColor;
+      box.style.background = constants._canGetBoxColor;
       box.firstChild.classList.add(constants._canGetClass);
     }
   }
@@ -98,9 +98,9 @@ function normalizeChessBoard() {
     for (let boxIndex = 0; boxIndex < 8; boxIndex++) {
       let box = document.getElementById(getCoordinatesAsString(rowIndex, boxIndex));
       if((boxIndex+rowIndex) % 2 === 1) {
-        box.style.backgroundColor = constants._blackBoxColor;
+        box.style.background = constants._blackBoxColor;
       } else {
-        box.style.backgroundColor = constants._whiteBoxColor;
+        box.style.background = constants._whiteBoxColor;
       }
       
       box.classList.remove(constants._canMoveClass);
