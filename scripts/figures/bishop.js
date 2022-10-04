@@ -11,7 +11,6 @@ export default class Bishop extends Figure {
 
         let moves = this.color === 'white' ? whiteMoves : blackMoves;
 
-        // Creating for white figures first
         const calculateMoves = function(self, matrix, x, y, moves, a, b, c, d) {
             for (let i = 1; i < 8; i++) {
                 if(a) {
@@ -28,14 +27,9 @@ export default class Bishop extends Figure {
                     y = self.currentY - i;
                 }
     
-                if(self.isValidCoordinates(x,y) && matrix[x][y] === null) {
-                    moves.push({x: x, y: y});
-                } else if(self.isValidCoordinates(x,y)  
-                    && matrix[x][y]
-                    && matrix[x][y].color !== self.color) {
-                    moves.push({x: x, y: y});
-                    break;
-                } else {
+                let breakFlag = self.isValidMove(matrix, x, y, self, moves);
+
+                if(breakFlag) {
                     break;
                 }
             }
