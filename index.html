@@ -11,16 +11,24 @@
 <body>
     <div id="chess-board">
     </div>
-    <div id="timer">00:00:00</div>
-    <div id="move"></div>
-    <div class="wrapper d-none">
+    <div class="timer-container">
+        <span id="timer">
+            00:00:00
+        </span>
+    </div>
+    <div id="move">white turn</div>
+    <div class="wrapper">
         <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p class="modal-message">The game has ended.</p>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p class="modal-message">The game has ended.</p>
+            </div>
         </div>
-
-        </div>
+    </div>
+    <div id="removed-figures" class="d-none">
+        <span>Removed Figures</span>
+        <div class="black-figures"></div>
+        <div class="white-figures"></div>
     </div>
     <canvas id="background"></canvas>
     <script src="./scripts/init.js" type="module"></script>

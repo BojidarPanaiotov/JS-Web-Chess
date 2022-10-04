@@ -14,8 +14,23 @@
     margin: 0 auto;
 }
 
-#timer,
+#timer {
+    margin: 1em auto;
+    text-align: center;
+    font-size: 1.2em;
+    border: 2px solid #404B69;
+    border-radius: 50%;
+    padding: 0.5em;
+    background: linear-gradient(34deg, rgba(195,180,180,1) 0%, rgba(242,255,255,1) 51%, rgba(175,167,167,1) 100%);
+}
+
 #move {
+    margin: 1em auto;
+    text-align: center;
+    font-size: 2em;
+}
+
+.timer-container {
     margin: 1em auto;
     text-align: center;
     font-size: 2em;
@@ -51,4 +66,17 @@
     25%  {top: 0%; bottom: 10%;}
     50%  {top: 10%; bottom: 0%;}
     100% {top: 0%; bottom: 10%;}
+}
+
+#removed-figures {
+    position: absolute;
+    top: 2%;
+}
+
+.white-figures,
+.black-figures {
+    font-size: 2.5em;
+    margin: 0.1em auto;
+    border: 2px solid #404B69;
+    background: linear-gradient(34deg, rgba(195,180,180,1) 0%, rgba(242,255,255,1) 51%, rgba(175,167,167,1) 100%);
 }

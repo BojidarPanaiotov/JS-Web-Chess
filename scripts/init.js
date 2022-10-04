@@ -7,12 +7,17 @@ let matrix = [];
 let lastClickedFigure;
 let whichColorTurnIs = constants._white;
 let timer = Game.startTimer();
+const removedFigures = {
+  white: [],
+  black: []
+};
 
 // Drawing chess field along with all figures
 Game.drawChessBoard(chessBoardElement,matrix,figures.figuresToDraw);
 
 // Listening for figure click
 chessBoardElement.addEventListener('click', function(e) {
+  console.log(removedFigures);
   let canMove = e.target.classList.contains(constants._canMoveClass);
   let canGet = e.target.classList.contains(constants._canGetClass);
 
@@ -23,7 +28,8 @@ chessBoardElement.addEventListener('click', function(e) {
   if(canMove) {
     Game.moveFigure(matrix, e, lastClickedFigure);
   } else if(canGet) {
-    Game.removeFigure(matrix, e, lastClickedFigure, timer);
+    Game.removeFigure(matrix, e, lastClickedFigure, timer, removedFigures);
+    Game.handleRemovedFigures(removedFigures);
   }
   
   if(canMove || canGet) {

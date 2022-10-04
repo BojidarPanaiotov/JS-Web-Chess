@@ -112,7 +112,7 @@ function normalizeChessBoard() {
   });
 }
 
-function removeFigure(matrix, e, lastClickedFigure, timer) {
+function removeFigure(matrix, e, lastClickedFigure, timer, removedFigures) {
   // Getting figure as HTML element
   var htmlFigure = document.getElementById(e.target.parentNode.id);
   // Getting the figure as object
@@ -120,6 +120,8 @@ function removeFigure(matrix, e, lastClickedFigure, timer) {
   var figureObj = matrix[arrayIndex[0]][arrayIndex[1]];
   // Removing the figure from the matrix
   var endGame = figureObj.destroy(matrix);
+  // Adding the removed figure to the array
+  removedFigures[figureObj.color].push(figureObj);
   // Removing the figure from the DOM
   htmlFigure.firstChild.textContent = constants._emptyString;
   // Moving the other figure to this position in the matrix
@@ -263,6 +265,22 @@ function printPlayerTurn(playerColor) {
   document.getElementById('move').textContent = playerColor + ' turn';
 }
 
+function handleRemovedFigures(removedFigures) {
+  let container = document.getElementById('removed-figures');
+  container.classList.remove('d-none');
+  let whiteFiguresContainer = container.querySelector('.white-figures');
+  whiteFiguresContainer.textContent = '';
+  let blackFiguresContainer = container.querySelector('.black-figures');
+  blackFiguresContainer.textContent = '';
+
+  for (let index = 0; index < removedFigures.black.length; index++) {
+    blackFiguresContainer.textContent += removedFigures.black[index].figureIcon;
+  }
+  for (let index = 0; index < removedFigures.white.length; index++) {
+    whiteFiguresContainer.textContent += removedFigures.white[index].figureIcon;
+  }
+}
+
 export default {
     getClickedFigureAsObject,
     drawChessBoard,
@@ -276,5 +294,6 @@ export default {
     stopGame, 
     getKing,
     handleTurns,
-    printPlayerTurn
+    printPlayerTurn,
+    handleRemovedFigures
 }
