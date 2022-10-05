@@ -219,6 +219,19 @@ function printPlayerTurn(playerColor) {
 }
 
 function handleRemovedFigures(removedFigures) {
+  const sortingByFigure = (f1, f2) => {
+    if (f1.name < f2.name) {
+      return -1;
+    }
+    if (f1.name > f2.name) {
+        return 1;
+    }
+    return 0;
+  };
+
+  removedFigures.white.sort(sortingByFigure);
+  removedFigures.black.sort(sortingByFigure);
+
   let container = document.getElementById('removed-figures');
   container.classList.remove('d-none');
   let whiteFiguresContainer = container.querySelector('.white-figures');

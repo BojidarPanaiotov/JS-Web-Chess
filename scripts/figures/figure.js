@@ -4,6 +4,7 @@ export default class Figure {
       this.currentY = initialY;
       this.figureIcon = figureIcon;
       this.color = color;
+      this.name = this.constructor.name.toString();
     }
 
   move(matrix, clickedCoordinates) {
