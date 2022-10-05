@@ -43,11 +43,11 @@ chessBoardElement.addEventListener('click', function(e) {
   }
 
   // Checking the turn
-  let turn = Game.Turn.handleTurns(whichColorTurnIs, lastClickedFigure);
+  // let turn = Game.Turn.handleTurns(whichColorTurnIs, lastClickedFigure);
 
-  if(turn) {
-    return;
-  }
+  // if(turn) {
+  //   return;
+  // }
 
   Game.Draw.animateFigure(constants._idleAnimation, e);
 

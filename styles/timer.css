@@ -1,0 +1,15 @@
+#timer {
+    margin: 1em auto;
+    text-align: center;
+    font-size: 1.2em;
+    border: 2px solid #404B69;
+    border-radius: 50%;
+    padding: 0.5em;
+    background: linear-gradient(34deg, rgba(195,180,180,1) 0%, rgba(242,255,255,1) 51%, rgba(175,167,167,1) 100%);
+}
+
+.timer-container {
+    margin: 1em auto;
+    text-align: center;
+    font-size: 2em;
+}
