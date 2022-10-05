@@ -29,19 +29,31 @@
 }
 
 
-#removed-figures {
+#removed-figures-white {
     position: absolute;
     bottom: 2%;
+    left: 2%;
 }
 
-.white-figures,
-.black-figures {
+#removed-figures-black {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+
+.removed-figures-header {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#white-figures,
+#black-figures {
     font-size: 2.5em;
     margin: 0.1em auto;
     border: 2px solid #404B69;
     background: linear-gradient(34deg, rgba(195,180,180,1) 0%, rgba(242,255,255,1) 51%, rgba(175,167,167,1) 100%);
     height: 1.2em;
-    width: auto;
+    width: 15em;
 }
 
 .idle-animation {

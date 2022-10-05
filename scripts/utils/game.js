@@ -232,11 +232,9 @@ function handleRemovedFigures(removedFigures) {
   removedFigures.white.sort(sortingByFigure);
   removedFigures.black.sort(sortingByFigure);
 
-  let container = document.getElementById('removed-figures');
-  container.classList.remove('d-none');
-  let whiteFiguresContainer = container.querySelector('.white-figures');
+  let whiteFiguresContainer = document.querySelector('#white-figures');
   whiteFiguresContainer.textContent = '';
-  let blackFiguresContainer = container.querySelector('.black-figures');
+  let blackFiguresContainer = document.querySelector('#black-figures');
   blackFiguresContainer.textContent = '';
 
   for (let index = 0; index < removedFigures.black.length; index++) {
