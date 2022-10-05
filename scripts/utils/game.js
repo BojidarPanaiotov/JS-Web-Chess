@@ -54,7 +54,7 @@ function drawChessBoard(root,matrix,figures) {
   }
 }
 
-function handleFigureAnimation(animationClass, e) {
+function animateFigure(animationClass, e) {
   // Find idle figure animation
   let animation = document.querySelectorAll(constants._dot+animationClass);
 
@@ -164,6 +164,80 @@ function getCoordinatesAsString(x,y) {
   return x + constants._splitSymbol + y;
 }
 
+function stopGame(theFigureThatLostColor, timer) {
+  let winner = ' White';
+  let timePlayed = document.getElementById(constants._timer).textContent;
+  if(theFigureThatLostColor === 'white') {
+    winner = ' Black'
+  }
+  document.querySelector('.wrapper').classList.remove('d-none');
+    // Get the modal
+  var modal = document.getElementById("myModal");
+  document.querySelector('.modal-message').textContent += winner + ' figures won!' + ' The game continued ' +timePlayed;
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  modal.style.display = "block";
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  stopTimer(timer);
+}
+
+function getKing(matrix, color) {
+  let king;
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix.length; col++) {
+      let currentFigure = matrix[row][col];
+      
+      if(currentFigure instanceof King && currentFigure.color === color) {
+        king = currentFigure;
+      }
+    }
+  }
+
+  return king;
+}
+
+function handleTurns(colorTurn, lastClickedFigure) {
+  return colorTurn !== lastClickedFigure.color;
+}
+
+function printPlayerTurn(playerColor) {
+  document.getElementById('move').textContent = playerColor + ' turn';
+}
+
+function handleRemovedFigures(removedFigures) {
+  let container = document.getElementById('removed-figures');
+  container.classList.remove('d-none');
+  let whiteFiguresContainer = container.querySelector('.white-figures');
+  whiteFiguresContainer.textContent = '';
+  let blackFiguresContainer = container.querySelector('.black-figures');
+  blackFiguresContainer.textContent = '';
+
+  for (let index = 0; index < removedFigures.black.length; index++) {
+    blackFiguresContainer.textContent += removedFigures.black[index].figureIcon;
+  }
+  for (let index = 0; index < removedFigures.white.length; index++) {
+    whiteFiguresContainer.textContent += removedFigures.white[index].figureIcon;
+  }
+}
+
+function isCheck(matrix, color) {
+  return getKing(matrix, color).isCheck(matrix);
+}
+
 function startTimer() {
   return setInterval(function() {
     let timerElement = document.getElementById(constants._timer);
@@ -211,89 +285,33 @@ function startTimer() {
   }, 1000);
 }
 
-function stopGame(theFigureThatLostColor, timer) {
-  let winner = ' White';
-  let timePlayed = document.getElementById(constants._timer).textContent;
-  if(theFigureThatLostColor === 'white') {
-    winner = ' Black'
-  }
-  document.querySelector('.wrapper').classList.remove('d-none');
-    // Get the modal
-  var modal = document.getElementById("myModal");
-  document.querySelector('.modal-message').textContent += winner + ' figures won!' + ' The game continued ' +timePlayed;
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
-  modal.style.display = "block";
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-
+function stopTimer(timer) {
   clearInterval(timer);
 }
-
-function getKing(matrix, color) {
-  let king;
-
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix.length; col++) {
-      let currentFigure = matrix[row][col];
-      
-      if(currentFigure instanceof King && currentFigure.color === color) {
-        king = currentFigure;
-      }
-    }
-  }
-
-  return king;
-}
-
-function handleTurns(colorTurn, lastClickedFigure) {
-  return colorTurn !== lastClickedFigure.color;
-}
-
-function printPlayerTurn(playerColor) {
-  document.getElementById('move').textContent = playerColor + ' turn';
-}
-
-function handleRemovedFigures(removedFigures) {
-  let container = document.getElementById('removed-figures');
-  container.classList.remove('d-none');
-  let whiteFiguresContainer = container.querySelector('.white-figures');
-  whiteFiguresContainer.textContent = '';
-  let blackFiguresContainer = container.querySelector('.black-figures');
-  blackFiguresContainer.textContent = '';
-
-  for (let index = 0; index < removedFigures.black.length; index++) {
-    blackFiguresContainer.textContent += removedFigures.black[index].figureIcon;
-  }
-  for (let index = 0; index < removedFigures.white.length; index++) {
-    whiteFiguresContainer.textContent += removedFigures.white[index].figureIcon;
-  }
-}
-
 export default {
-    getClickedFigureAsObject,
-    drawChessBoard,
-    handleFigureAnimation,
-    changeBoxesColor,
-    normalizeChessBoard,
-    removeFigure,
-    moveFigure,
-    getCoordinatesAsString,
-    startTimer,
-    stopGame, 
-    getKing,
-    handleTurns,
-    printPlayerTurn,
-    handleRemovedFigures
+    Draw: {
+      drawChessBoard,
+      changeBoxesColor,
+      normalizeChessBoard,
+      handleRemovedFigures,
+      animateFigure
+    },
+    Move: {
+      removeFigure,
+      moveFigure,
+      getKing,
+      isCheck,
+    },
+    Turn: {
+      handleTurns,
+      printPlayerTurn,
+    },
+    Utils: {
+      getClickedFigureAsObject,
+      getCoordinatesAsString,
+    },
+    Timer: {
+      startTimer,
+      stopTimer
+    }
 }

@@ -6,55 +6,52 @@ let chessBoardElement = document.getElementById(constants._chessBoard);
 let matrix = [];
 let lastClickedFigure;
 let whichColorTurnIs = constants._white;
-let timer = Game.startTimer();
+let timer = Game.Timer.startTimer();
 const removedFigures = {
   white: [],
   black: []
 };
 
 // Drawing chess field along with all figures
-Game.drawChessBoard(chessBoardElement,matrix,figures.figuresToDraw);
+Game.Draw.drawChessBoard(chessBoardElement,matrix,figures.figuresToDraw);
 
 // Listening for figure click
 chessBoardElement.addEventListener('click', function(e) {
-  console.log(removedFigures);
   let canMove = e.target.classList.contains(constants._canMoveClass);
   let canGet = e.target.classList.contains(constants._canGetClass);
 
-  let whiteKing = Game.getKing(matrix, constants._white);
-  let blackKing = Game.getKing(matrix, constants._black);
-
   // Means that the player is moving his figure or getting enemy one
   if(canMove) {
-    Game.moveFigure(matrix, e, lastClickedFigure);
+    Game.Move.moveFigure(matrix, e, lastClickedFigure);
   } else if(canGet) {
-    Game.removeFigure(matrix, e, lastClickedFigure, timer, removedFigures);
-    Game.handleRemovedFigures(removedFigures);
+    Game.Move.removeFigure(matrix, e, lastClickedFigure, timer, removedFigures);
+    Game.Draw.handleRemovedFigures(removedFigures);
   }
   
   if(canMove || canGet) {
     whichColorTurnIs = whichColorTurnIs === constants._white ? constants._black : constants._white;
-    Game.printPlayerTurn(whichColorTurnIs);
+    Game.Turn.printPlayerTurn(whichColorTurnIs);
     return;
   }
 
-  // Means that player just clicked a figure
-  let figure = Game.getClickedFigureAsObject(e,matrix);
+  // Trying to get the clicked figure
+  let figure = Game.Utils.getClickedFigureAsObject(e,matrix);
 
-  // Actually clicked a figure
+  // If the player clicked an actual figure and not something else
   if(figure) {
     lastClickedFigure = figure;
   }
 
   // Checking the turn
-  let turn = Game.handleTurns(whichColorTurnIs, lastClickedFigure);
+  let turn = Game.Turn.handleTurns(whichColorTurnIs, lastClickedFigure);
 
   if(turn) {
     return;
   }
-  Game.handleFigureAnimation(constants._idleAnimation, e);
-  
+
+  Game.Draw.animateFigure(constants._idleAnimation, e);
+
   if(figure) {
-    Game.changeBoxesColor(figure.color, matrix, figure.getPossibleMoves(matrix));
+    Game.Draw.changeBoxesColor(figure.color, matrix, figure.getPossibleMoves(matrix));
   }
 });
